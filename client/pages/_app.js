@@ -1,14 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import buildClient from '../api/build-client';
 import Header from '../components/header';
+import Footer from '../components/Footer';
+import 'flowbite';
+import '../api/globals.css'
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
   return (
-    <div>
+    <div className="bg-green-bg">
       <Header currentUser={currentUser} />
-      <div className="container">
+      <div className="container py-24">
         <Component currentUser={currentUser} {...pageProps} />
       </div>
+      <Footer/>
     </div>
   );
 };

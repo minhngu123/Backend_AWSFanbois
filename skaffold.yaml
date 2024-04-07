@@ -8,7 +8,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: minh31082002/auth
+    - image: lechieuhung/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -16,7 +16,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: minh31082002/ticketing-client
+    - image: lechieuhung/ticketing-client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -24,7 +24,7 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: minh31082002/tickets
+    - image: lechieuhung/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -32,7 +32,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: minh31082002/orders
+    - image: lechieuhung/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -40,7 +40,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: minh31082002/expiration
+    - image: lechieuhung/expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
@@ -48,7 +48,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: minh31082002/payments
+    - image: lechieuhung/payments
       context: payments
       docker:
         dockerfile: Dockerfile
