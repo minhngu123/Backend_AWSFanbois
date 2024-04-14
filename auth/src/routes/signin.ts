@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@mnticket/common';
+import { validateRequest, BadRequestError } from '@lechieuhungticket/common';
 
 import { Password } from '../services/password';
 import { User } from '../models/user';
@@ -40,6 +40,8 @@ router.post(
     const userJwt = jwt.sign(
       {
         id: existingUser.id,
+        username: existingUser.username,
+        phoneNumber: existingUser.phoneNumber,
         email: existingUser.email
       },
       process.env.JWT_KEY!

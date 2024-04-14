@@ -1,6 +1,6 @@
 import { Message } from 'node-nats-streaming';
 import mongoose from 'mongoose';
-import { OrderCreatedEvent, OrderStatus } from '@mnticket/common';
+import { OrderCreatedEvent, OrderStatus } from '@lechieuhungticket/common';
 import { OrderCreatedListener } from '../order-created-listener';
 import { natsWrapper } from '../../../nats-wrapper';
 import { Ticket } from '../../../models/ticket';

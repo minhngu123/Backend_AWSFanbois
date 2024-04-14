@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@mnticket/common';
+import { validateRequest, BadRequestError } from '@lechieuhungticket/common';
 
 import { User } from '../models/user';
 
@@ -16,25 +16,39 @@ router.post(
     body('password')
       .trim()
       .isLength({ min: 4, max: 20 })
-      .withMessage('Password must be between 4 and 20 characters')
+      .withMessage('Password must be between 4 and 20 characters'),
+    body('username')
+      .isAlpha()
+      .isLength({ min: 4, max: 20 })
+      .withMessage('Username must be between 4 and 20 characters'),
+    body('phoneNumber')
+      .isNumeric()
+      .isLength({ min: 10, max: 10 })
+      .withMessage('Phone Number must be 10 numbers'),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-
+    const { email, username, phoneNumber, password } = req.body;
     const existingUser = await User.findOne({ email });
+    const existingPhoneNumber = await User.findOne({ phoneNumber });
 
     if (existingUser) {
       throw new BadRequestError('Email in use');
     }
+    if (existingPhoneNumber) {
+      throw new BadRequestError('Phone number in use');
+    }
 
-    const user = User.build({ email, password });
+    const user = User.build({ email, username, phoneNumber, password });
     await user.save();
-
+    const testemail = await User.find({ username });
+    console.log(testemail)
     // Generate JWT
     const userJwt = jwt.sign(
       {
         id: user.id,
+        username: user.username,
+        phoneNumber: user.phoneNumber,
         email: user.email
       },
       process.env.JWT_KEY!

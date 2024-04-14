@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import buildClient from '../api/build-client';
 import Header from '../components/header';
-import Footer from '../components/Footer';
+import Footer from '../components/footer';
 import 'flowbite';
 import '../api/globals.css'
 

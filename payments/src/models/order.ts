@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
-import { OrderStatus } from '@mnticket/common';
+import { OrderStatus } from '@lechieuhungticket/common';
 
 interface OrderAttrs {
   id: string;
   version: number;
+  title: string;
   userId: string;
   price: number;
   status: OrderStatus;
@@ -12,6 +13,7 @@ interface OrderAttrs {
 
 interface OrderDoc extends mongoose.Document {
   version: number;
+  title: string;
   userId: string;
   price: number;
   status: OrderStatus;
@@ -23,6 +25,10 @@ interface OrderModel extends mongoose.Model<OrderDoc> {
 
 const orderSchema = new mongoose.Schema(
   {
+    title: {
+      type: String,
+      required: true,
+    },
     userId: {
       type: String,
       required: true,
@@ -53,6 +59,7 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
   return new Order({
     _id: attrs.id,
     version: attrs.version,
+    title: attrs.title,
     price: attrs.price,
     userId: attrs.userId,
     status: attrs.status,

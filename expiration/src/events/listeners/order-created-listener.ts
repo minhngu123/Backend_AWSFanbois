@@ -1,4 +1,4 @@
-import { Listener, OrderCreatedEvent, Subjects } from '@mnticket/common';
+import { Listener, OrderCreatedEvent, Subjects } from '@lechieuhungticket/common';
 import { Message } from 'node-nats-streaming';
 import { queueGroupName } from './queue-group-name';
 import { expirationQueue } from '../../queues/expiration-queue';

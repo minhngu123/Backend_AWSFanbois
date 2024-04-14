@@ -4,6 +4,8 @@ import useRequest from "../../hooks/use-request";
 
 export default () => {
   const [email, setEmail] = useState("");
+  const [username, setUserName] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const { doRequest, errors } = useRequest({
@@ -11,6 +13,8 @@ export default () => {
     method: "post",
     body: {
       email,
+      username,
+      phoneNumber,
       password,
     },
     onSuccess: () => Router.push("/"),
@@ -18,11 +22,10 @@ export default () => {
 
   const onSubmit = async (event) => {
     if (password != repeatPassword) {
-      alert("Your repeat password does not match")
+      alert("Your repeat password does not match");
       return;
     }
     event.preventDefault();
-
     await doRequest();
   };
 
@@ -49,6 +52,36 @@ export default () => {
         </div>
         <div className="mb-5">
           <label
+            htmlFor="username"
+            className="block mb-2 text-sm font-light text-green-t dark:text-white"
+          >
+            Your username
+          </label>
+          <input
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            className=" transition-colors bg-gray-50 border border-gray-300 text-green-bg text-sm rounded-lg focus:ring-green-bg focus:border-green-bg block w-full p-2.5"
+            placeholder="awsfanbois"
+            required
+          />
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="phoneNumber"
+            className="block mb-2 text-sm font-light text-green-t dark:text-white"
+          >
+            Your phone number
+          </label>
+          <input
+            value={phoneNumber}
+            onChange={(e) => setphoneNumber(e.target.value)}
+            className=" transition-colors bg-gray-50 border border-gray-300 text-green-bg text-sm rounded-lg focus:ring-green-bg focus:border-green-bg block w-full p-2.5"
+            placeholder="(+84) 123 456 789"
+            required
+          />
+        </div>
+        <div className="mb-5">
+          <label
             htmlFor="phone"
             className="block mb-2 text-sm font-light text-green-t dark:text-white"
           >
@@ -58,9 +91,7 @@ export default () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            id="password"
             className=" transition-colors bg-gray-50 border border-gray-300 text-green-bg text-sm rounded-lg focus:ring-green-bg focus:border-green-bg block w-full p-2.5"
-            placeholder="(+84) 12345678"
             required
           />
         </div>
@@ -75,7 +106,6 @@ export default () => {
             value={repeatPassword}
             onChange={(e) => setRepeatPassword(e.target.value)}
             type="password"
-            id="password"
             className=" transition-colors bg-gray-50 border border-gray-300 text-green-bg text-sm rounded-lg focus:ring-green-bg focus:border-green-bg block w-full p-2.5"
             required
           />

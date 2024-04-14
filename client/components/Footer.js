@@ -3,7 +3,7 @@ const Footer = () => {
     <>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" />
       <div className="min-h-screen flex flex-col">
-        <div class="flex-grow"></div>
+        <div className="flex-grow"></div>
         <footer className="bg-green-hd dark:bg-gray-900 text-center bottom-0 left-0 w-full">
           <div className="mx-auto w-2/3 max-w-screen-xl p-4 py-6 lg:py-8">
             <div className="md:flex md:justify-between">

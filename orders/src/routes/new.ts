@@ -6,7 +6,7 @@ import {
   NotFoundError,
   OrderStatus,
   BadRequestError
-} from '@mnticket/common';
+} from '@lechieuhungticket/common';
 import { body } from 'express-validator';
 import { Ticket } from '../models/ticket';
 import { Order } from '../models/order';
@@ -65,6 +65,7 @@ router.post(
       expiresAt: order.expiresAt.toISOString(),
       ticket: {
         id: ticket.id,
+        title: ticket.title,
         price: ticket.price
       }
     });
