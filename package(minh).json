@@ -1,6 +1,6 @@
 {
-  "name": "@mnticket/common",
-  "version": "1.0.4",
+  "name": "@lechieuhungticket/common",
+  "version": "1.0.2",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
