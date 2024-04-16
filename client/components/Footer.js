@@ -27,20 +27,20 @@ const Footer = () => {
                     />
                   </svg>
                   <span className="self-center text-2xl font-semibold whitespace-nowrap text-green-t">
-                    TicketBok
+                    awsfanbois
                   </span>
                 </a>
               </div>
               <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                 <div>
-                  <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                  <h2 className="font-sans mb-6 text-sm font-thin text-green-t uppercase dark:text-white">
                     Resources
                   </h2>
                   <ul className="text-gray-500 dark:text-gray-400 font-medium">
                     <li className="mb-4">
                       <a
                         href="https://flowbite.com/"
-                        className="hover:underline"
+                        className="hover:underline font-thin"
                       >
                         Flowbite
                       </a>
@@ -48,7 +48,7 @@ const Footer = () => {
                     <li>
                       <a
                         href="https://tailwindcss.com/"
-                        className="hover:underline"
+                        className="hover:underline font-thin"
                       >
                         Tailwind CSS
                       </a>
@@ -56,14 +56,14 @@ const Footer = () => {
                   </ul>
                 </div>
                 <div>
-                  <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                  <h2 className="font-sans mb-6 text-sm font-thin text-green-t uppercase dark:text-white">
                     Follow us
                   </h2>
                   <ul className="text-gray-500 dark:text-gray-400 font-medium">
                     <li className="mb-4">
                       <a
                         href="https://github.com/themesberg/flowbite"
-                        className="hover:underline "
+                        className="hover:underline font-thin"
                       >
                         Github
                       </a>
@@ -71,7 +71,7 @@ const Footer = () => {
                     <li>
                       <a
                         href="https://discord.gg/4eeurUVvTy"
-                        className="hover:underline"
+                        className="hover:underline font-thin"
                       >
                         Discord
                       </a>
@@ -79,17 +79,17 @@ const Footer = () => {
                   </ul>
                 </div>
                 <div>
-                  <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                  <h2 className="font-sans mb-6 text-sm font-thin text-green-t uppercase dark:text-white">
                     Legal
                   </h2>
                   <ul className="text-gray-500 dark:text-gray-400 font-medium">
                     <li className="mb-4">
-                      <a href="#" className="hover:underline">
+                      <a href="#" className="hover:underline font-thin">
                         Privacy Policy
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="hover:underline">
+                      <a href="#" className="hover:underline font-thin">
                         Terms &amp; Conditions
                       </a>
                     </li>

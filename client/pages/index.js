@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const LandingPage = ({ currentUser, tickets }) => {
   const ticketList = tickets.map((ticket) => {
+    const formattedDate = new Date(ticket.date).toDateString();
     return (
       <div
         key={ticket.id}
@@ -19,19 +20,19 @@ const LandingPage = ({ currentUser, tickets }) => {
             </h5>
           </Link>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Description
+            {/* {ticket.description} */}
           </p>
-          <div className="grid md:grid-cols-2">
+          <div className="grid md:grid-cols-1">
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               Date:{" "}
               <span className="mb-3 font-normal text-green-bg dark:text-gray-400">
-                11/11/2024
+                {formattedDate}
               </span>
             </p>
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               Location:{" "}
               <span className="mb-3 font-normal text-green-bg dark:text-gray-400">
-                Da Nang
+                {ticket.location}
               </span>
             </p>
             <div className="grid md:grid-cols-1">

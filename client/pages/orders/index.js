@@ -19,7 +19,7 @@ const OrderIndex = ({ orders }) => {
           {orders.map((order) => (
             <tr
               key={order.id}
-              className="bg-green-t hover:bg-green-hd transition-colors"
+              className="bg-green-t2 hover:bg-green-hd transition-colors"
             >
               <th
                 scope="row"
@@ -30,7 +30,7 @@ const OrderIndex = ({ orders }) => {
                   src="https://media.discordapp.net/attachments/593774840381571078/1227291450358890496/e8c2ad89-c76f-4026-9073-1c779495f268.png?ex=6627df3b&is=66156a3b&hm=7585fc3564ffd3101f340e752a1ed2f411a1a7a00487f99b86d12d24c2764d78&=&format=webp&quality=lossless"
                 />
                 <div className="ps-3">
-                  <div className="text-base font-semibold">
+                  <div className="text-base font-semibold text-green-t">
                     {order.ticket.title}
                   </div>
                   <div className="font-normal text-gray-500">Description</div>

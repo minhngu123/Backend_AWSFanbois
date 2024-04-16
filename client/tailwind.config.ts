@@ -11,6 +11,16 @@ const config: Config = {
     './node_modules/flowbite/**/*.tsx'
   ],
   theme: {
+    fontFamily: {
+      sans: [
+        '"Inter var", sans-serif',
+        {
+          fontFeatureSettings: '"cv11", "ss01"',
+          fontVariationSettings: '"opsz" 32'
+        },
+      ]
+    }
+    ,
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -19,10 +29,11 @@ const config: Config = {
       },
     },
     colors: {
-      'green-bg': '#88AB8E',
-      'green-hd': '#AFC8AD',
-      'green-t' : '#EEE7DA',
-      'green-t2': "#B2B6C8"
+      'green-bg': '#171d24',
+      'green-hd': '#00131a',
+      'green-t' : '#00b6f0',
+      'green-t2': '#163949',
+      'line;': '#3b424b'
     }
   },
   plugins: [

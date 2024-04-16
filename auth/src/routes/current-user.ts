@@ -4,7 +4,7 @@ import { currentUser } from '@lechieuhungticket/common';
 const router = express.Router();
 
 router.get('/api/users/currentuser', currentUser, (req, res) => {
-  res.send({ currentUsers: req.currentUser || null });
+  res.send({ currentUser: req.currentUser || null });
 });
 
 export { router as currentUserRouter };

@@ -91,7 +91,7 @@ router.post(
     <body>
       <h1>Thank you for your purchase!</h1>
       <p>Dear ${req.currentUser!.email},</p>
-      <p>We are delighted to confirm your recent order, #${payment.orderId}. Your order details are as follows:</p>
+      <p>We are delighted to confirm your recent order, #${payment.orderId.slice(-6).toUpperCase()}. Your order details are as follows:</p>
         <ul>
           <li>Your Username: ${req.currentUser!.username}</li>
           <li>Your Phone Number: ${req.currentUser!.phoneNumber}</li>
