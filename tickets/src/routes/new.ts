@@ -22,9 +22,7 @@ router.post(
     body("location")
       .isLength({ min: 4, max: 200 })
       .withMessage("Location must be between 4 and 200 characters"),
-    body("date")
-      .isAfter()
-      .withMessage("Date must be after current date"),
+    body("date").isAfter().withMessage("Date must be after current date"),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -39,6 +37,7 @@ router.post(
       userId: req.currentUser!.id,
     });
     await ticket.save();
+    console.log(ticket);
     new TicketCreatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       title: ticket.title,

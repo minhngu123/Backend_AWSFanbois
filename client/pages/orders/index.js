@@ -33,7 +33,7 @@ const OrderIndex = ({ orders }) => {
                   <div className="text-base font-semibold text-green-t">
                     {order.ticket.title}
                   </div>
-                  <div className="font-normal text-gray-500">Description</div>
+                  <div className="font-normal text-gray-500">{order.ticket.description}</div>
                 </div>
               </th>
               <td className="px-6 py-4">{order.ticket.price}$</td>

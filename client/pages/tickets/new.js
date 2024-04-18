@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Datepicker } from "flowbite-react";
 import Router from "next/router";
 import useRequest from "../../hooks/use-request";
+import axios from "axios";
 
 const NewTicket = () => {
   const [title, setTitle] = useState("");
@@ -24,6 +25,21 @@ const NewTicket = () => {
     onSuccess: () => Router.push("/"),
   });
 
+  const uploadImage = (files) => {
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    formData.append("upload_preset", "wfpsgkjn");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dcbt4j7z2/image/upload", formData)
+      .then((response) => {
+        setImage(response.data.url);
+        console.log(response);
+      })
+      .catch((errors) => {
+        alert("Wrong type of file, Image file only");
+      });
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(title, description, image, location, date, price);
@@ -41,7 +57,8 @@ const NewTicket = () => {
   };
 
   const handleDateChange = (date) => {
-    setDate(date);
+    const formattedDate = date.toLocaleDateString();
+    setDate(formattedDate);
   };
 
   return (
@@ -88,17 +105,27 @@ const NewTicket = () => {
               className="form-control"
             />
           </div>
-          <div className="form-group">
-            <label className="text-green-t font-thin text-md font-sans">
-              Image
-            </label>
-            <input
-              value={image}
-              onBlur={onBlur}
-              onChange={(e) => setImage(e.target.value)}
-              className="form-control"
-            />
-          </div>
+          <label
+            className="block font-thin font-sans text-green-t dark:text-white"
+            htmlFor="file_input"
+          >
+            Upload file
+          </label>
+          <input
+            className="block w-full text-sm text-green-t border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            aria-describedby="file_input_help"
+            id="file_input"
+            type="file"
+            onChange={(e) => {
+              uploadImage(e.target.files);
+            }}
+          />
+          <p
+            className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+            id="file_input_help"
+          >
+            SVG, PNG, JPG (MAX. 800x400px).
+          </p>
           <div className="form-group">
             <label className="text-green-t font-thin text-md font-sans">
               Location
@@ -114,10 +141,7 @@ const NewTicket = () => {
             <label className="text-green-t font-thin text-md font-sans">
               Date
             </label>
-            <Datepicker
-              value={date}
-              onSelectedDateChanged={handleDateChange}
-            />
+            <Datepicker value={date} onSelectedDateChanged={handleDateChange} />
           </div>
           {errors}
           <button className="btn btn-primary mt-8 bg-green-t text-green-bg border-green-t hover:bg-green-t2 hover:text-green-t hover:border-green-bg">

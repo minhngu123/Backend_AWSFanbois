@@ -41,8 +41,6 @@ router.post(
 
     const user = User.build({ email, username, phoneNumber, password });
     await user.save();
-    const testemail = await User.find({ username });
-    console.log(testemail)
     // Generate JWT
     const userJwt = jwt.sign(
       {
