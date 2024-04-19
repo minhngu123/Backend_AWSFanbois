@@ -1,7 +1,26 @@
 import Router from "next/router";
 import useRequest from "../../hooks/use-request";
+import {
+  Button,
+  Checkbox,
+  Label,
+  Modal,
+  TextInput,
+  Textarea,
+} from "flowbite-react";
+import { useState } from "react";
 
 const TicketShow = ({ ticket, currentUser }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [location, setLocation] = useState("");
+
+  function onCloseModal() {
+    setOpenModal(false);
+  }
+
   const { doRequest, errors } = useRequest({
     url: "/api/orders",
     method: "post",
@@ -43,23 +62,97 @@ const TicketShow = ({ ticket, currentUser }) => {
                   {ticket.title}
                 </span>
                 <span></span>
-                <button
-                  onClick={() => doRequest()}
-                  type="button"
-                  className="text-xl font-thin transition-colors py-2.5 px-5 me-2 mb-2 text-green-t focus:outline-none bg-green-hd rounded-full border hover:bg-green-t2 hover:text-green-t focus:z-10 focus:ring-4 focus:ring-gray-100"
-                >
-                  Book The Show
-                </button>
                 {ticket.userId == currentUser.id ? (
+                  <>
+                    <Button
+                      className="text-xl font-thin transition-colors py-2.5 px-5 me-2 mb-2 text-green-t focus:outline-none bg-green-hd rounded-full border hover:bg-green-t2 hover:text-green-t focus:z-10 focus:ring-4 focus:ring-gray-100"
+                      onClick={() => setOpenModal(true)}
+                    >
+                      &nbsp; Update Ticket
+                    </Button>
+                    <Modal
+                      show={openModal}
+                      size="md"
+                      onClose={onCloseModal}
+                      popup
+                    >
+                      <Modal.Header />
+                      <Modal.Body>
+                        <div className="space-y-6">
+                          <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+                            Update Ticket Informations
+                          </h3>
+                          <div>
+                            <div className="mb-2 block">
+                              <Label htmlFor="email" value="Ticket Title" />
+                            </div>
+                            <TextInput
+                              value={ticket.title}
+                              onChange={(event) => setTitle(event.target.value)}
+                              required
+                            />
+                          </div>
+                          <div>
+                            <div className="mb-2 block">
+                              <Label htmlFor="price" value="Ticket Price $" />
+                            </div>
+                            <TextInput
+                              id="title"
+                              value={ticket.price}
+                              onChange={(event) => setPrice(event.target.value)}
+                              required
+                            />
+                          </div>
+                          <div>
+                            <div className="mb-2 block">
+                              <Label
+                                htmlFor="description"
+                                value="Ticket Description"
+                              />
+                            </div>
+                            <Textarea
+                              id="title"
+                              value={ticket.description}
+                              onChange={(event) =>
+                                setDescription(event.target.value)
+                              }
+                              required
+                            />
+                          </div>
+                          <div>
+                            <div className="mb-2 block">
+                              <Label htmlFor="location" value="Location" />
+                            </div>
+                            <TextInput
+                              id="title"
+                              value={ticket.location}
+                              onChange={(event) =>
+                                setLocation(event.target.value)
+                              }
+                              required
+                            />
+                          </div>
+                          <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
+                            &nbsp;
+                            <a
+                              href="#"
+                              className="text-cyan-700 hover:underline dark:text-cyan-500"
+                            >
+                              Update Ticket
+                            </a>
+                          </div>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
+                  </>
+                ) : (
                   <button
                     onClick={() => doRequest()}
                     type="button"
                     className="text-xl font-thin transition-colors py-2.5 px-5 me-2 mb-2 text-green-t focus:outline-none bg-green-hd rounded-full border hover:bg-green-t2 hover:text-green-t focus:z-10 focus:ring-4 focus:ring-gray-100"
                   >
-                    Update
+                    &nbsp; Book The Show
                   </button>
-                ) : (
-                  <div />
                 )}
               </div>
             </div>

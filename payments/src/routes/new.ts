@@ -95,7 +95,7 @@ router.post(
         <ul>
           <li>Your Username: ${req.currentUser!.username}</li>
           <li>Your Phone Number: ${req.currentUser!.phoneNumber}</li>
-          <li>Ticket Price: ${order.title}</li>
+          <li>Ticket Title: ${order.title}</li>
           <li>Ticket Price: ${order.price}$</li>
           <li>Order Date: ${new Date().toLocaleDateString()}</li>
         </ul>

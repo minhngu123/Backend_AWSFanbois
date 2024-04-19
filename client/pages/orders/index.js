@@ -27,7 +27,7 @@ const OrderIndex = ({ orders }) => {
               >
                 <img
                   className="w-10 h-10 rounded-full"
-                  src="https://media.discordapp.net/attachments/593774840381571078/1227291450358890496/e8c2ad89-c76f-4026-9073-1c779495f268.png?ex=6627df3b&is=66156a3b&hm=7585fc3564ffd3101f340e752a1ed2f411a1a7a00487f99b86d12d24c2764d78&=&format=webp&quality=lossless"
+                  src="https://cdn-icons-png.flaticon.com/512/785/785581.png"
                 />
                 <div className="ps-3">
                   <div className="text-base font-semibold text-green-t">
