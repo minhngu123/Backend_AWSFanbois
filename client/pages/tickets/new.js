@@ -3,6 +3,7 @@ import { Datepicker } from "flowbite-react";
 import Router from "next/router";
 import useRequest from "../../hooks/use-request";
 import axios from "axios";
+import { instance } from "../../components/instance";
 
 const NewTicket = () => {
   const [title, setTitle] = useState("");
@@ -25,15 +26,40 @@ const NewTicket = () => {
     onSuccess: () => Router.push("/"),
   });
 
+  // const instance = axios.create();
+  // const uploadImage = async (files) => {
+  //   const formData = new FormData();
+  //   formData.append("file", files[0]);
+  //   formData.append("upload_preset", "wfpsgkjn");
+  //   formData.append("cloud_name", "dcbt4j7z2");
+  //   formData.append("api_secret", "c1kVbAo1XZxXVjX0Z3sLlLmS4Sc");
+  //   const res = await instance
+  //     .post("https://api.cloudinary.com/v1_1/dcbt4j7z2/image/upload", formData)
+  //     .then((response) => {
+  //       setImage(response.data.url);
+  //       console.log(response);
+  //     })
+  //     .catch((errors) => {
+  //       alert("Wrong type of file, Image file only");
+  //     });
+  // };
+
+  
   const uploadImage = (files) => {
     const formData = new FormData();
     formData.append("file", files[0]);
     formData.append("upload_preset", "wfpsgkjn");
-    axios
-      .post("https://api.cloudinary.com/v1_1/dcbt4j7z2/image/upload", formData)
+    instance
+      .post("https://api.cloudinary.com/v1_1/dcbt4j7z2/image/upload", formData, {
+        transformRequest: [
+          (data, headers) => {
+            delete headers.common["jwt-token"];
+            return data;
+          },
+        ]
+      })
       .then((response) => {
         setImage(response.data.url);
-        console.log(response);
       })
       .catch((errors) => {
         alert("Wrong type of file, Image file only");

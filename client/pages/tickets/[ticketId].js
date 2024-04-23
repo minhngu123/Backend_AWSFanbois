@@ -1,13 +1,6 @@
 import Router from "next/router";
+import { Button, Label, Modal, TextInput, Textarea } from "flowbite-react";
 import useRequest from "../../hooks/use-request";
-import {
-  Button,
-  Checkbox,
-  Label,
-  Modal,
-  TextInput,
-  Textarea,
-} from "flowbite-react";
 import { useState } from "react";
 
 const TicketShow = ({ ticket, currentUser }) => {
@@ -20,9 +13,8 @@ const TicketShow = ({ ticket, currentUser }) => {
   function onCloseModal() {
     setOpenModal(false);
   }
-
   const { doRequest, errors } = useRequest({
-    url: "/api/orders",
+    url: "https://orders.awsfanbois.me/api/orders",
     method: "post",
     body: {
       ticketId: ticket.id,
@@ -30,6 +22,25 @@ const TicketShow = ({ ticket, currentUser }) => {
     onSuccess: (order) =>
       Router.push("/orders/[orderId]", `/orders/${order.id}`),
   });
+
+  const {doUpdateRequest} = useRequest({
+    url: `https://tickets.awsfanbois.me/api/tickets/${ticket.id}`,
+    method: "post",
+    body: {
+      title: title,
+      description: description,
+      price:price,
+      location:location
+    },
+    onSuccess: (order) =>
+      Router.push("/orders/[orderId]", `/orders/${order.id}`),
+  });
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    await doUpdateRequest();
+  };
   const formattedDate = new Date(ticket.date).toLocaleDateString();
 
   return (
@@ -78,70 +89,76 @@ const TicketShow = ({ ticket, currentUser }) => {
                     >
                       <Modal.Header />
                       <Modal.Body>
-                        <div className="space-y-6">
-                          <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                            Update Ticket Informations
-                          </h3>
-                          <div>
-                            <div className="mb-2 block">
-                              <Label htmlFor="email" value="Ticket Title" />
-                            </div>
-                            <TextInput
-                              value={ticket.title}
-                              onChange={(event) => setTitle(event.target.value)}
-                              required
-                            />
-                          </div>
-                          <div>
-                            <div className="mb-2 block">
-                              <Label htmlFor="price" value="Ticket Price $" />
-                            </div>
-                            <TextInput
-                              id="title"
-                              value={ticket.price}
-                              onChange={(event) => setPrice(event.target.value)}
-                              required
-                            />
-                          </div>
-                          <div>
-                            <div className="mb-2 block">
-                              <Label
-                                htmlFor="description"
-                                value="Ticket Description"
+                        <form className="max-w-sm mx-auto" onSubmit={onSubmit}>
+                          <div className="space-y-6">
+                            <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+                              Update Ticket Informations
+                            </h3>
+                            <div>
+                              <div className="mb-2 block">
+                                <Label htmlFor="email" value="Ticket Title" />
+                              </div>
+                              <TextInput
+                                value={ticket.title}
+                                onChange={(event) =>
+                                  setTitle(event.target.value)
+                                }
+                                required
                               />
                             </div>
-                            <Textarea
-                              id="title"
-                              value={ticket.description}
-                              onChange={(event) =>
-                                setDescription(event.target.value)
-                              }
-                              required
-                            />
-                          </div>
-                          <div>
-                            <div className="mb-2 block">
-                              <Label htmlFor="location" value="Location" />
+                            <div>
+                              <div className="mb-2 block">
+                                <Label htmlFor="price" value="Ticket Price $" />
+                              </div>
+                              <TextInput
+                                id="title"
+                                value={ticket.price}
+                                onChange={(event) =>
+                                  setPrice(event.target.value)
+                                }
+                                required
+                              />
                             </div>
-                            <TextInput
-                              id="title"
-                              value={ticket.location}
-                              onChange={(event) =>
-                                setLocation(event.target.value)
-                              }
-                              required
-                            />
+                            <div>
+                              <div className="mb-2 block">
+                                <Label
+                                  htmlFor="description"
+                                  value="Ticket Description"
+                                />
+                              </div>
+                              <Textarea
+                                id="title"
+                                value={ticket.description}
+                                onChange={(event) =>
+                                  setDescription(event.target.value)
+                                }
+                                required
+                              />
+                            </div>
+                            <div>
+                              <div className="mb-2 block">
+                                <Label htmlFor="location" value="Location" />
+                              </div>
+                              <TextInput
+                                id="title"
+                                value={ticket.location}
+                                onChange={(event) =>
+                                  setLocation(event.target.value)
+                                }
+                                required
+                              />
+                            </div>
+                            <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
+                              &nbsp;
+                              <Link
+                                href="#"
+                                className="text-cyan-700 hover:underline dark:text-cyan-500"
+                              >
+                                Update Ticket
+                              </Link>
+                            </div>
                           </div>
-                          <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
-                            &nbsp;
-                            <a
-                              href="#"
-                              className="text-cyan-700 hover:underline dark:text-cyan-500"
-                            >
-                              Update Ticket
-                            </a>
-                          </div>
-                        </div>
+                        </form>
                       </Modal.Body>
                     </Modal>
                   </>
@@ -222,7 +239,9 @@ const TicketShow = ({ ticket, currentUser }) => {
 
 TicketShow.getInitialProps = async (context, client) => {
   const { ticketId } = context.query;
-  const { data } = await client.get(`/api/tickets/${ticketId}`);
+  const { data } = await client.get(
+    `https://tickets.awsfanbois.me/api/tickets/${ticketId}`
+  );
 
   return { ticket: data };
 };
